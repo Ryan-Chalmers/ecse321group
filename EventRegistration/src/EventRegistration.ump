@@ -15,7 +15,7 @@ class Event
 
 class Registration
 {
-  autotunique id;
+  autounique id;
   * -> 1 Participant participant;
   * -> 1 Event event;
 }
