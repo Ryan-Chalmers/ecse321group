@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.eventregistration.view;
 
+import javax.activity.InvalidActivityException;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,7 +41,12 @@ public class EventRegistrationPage extends JFrame {
 		addParticipantButton.setText("Add Participant");
 		addParticipantButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				addParticipantButtonActionPerformed(evt);
+				try {
+					addParticipantButtonActionPerformed(evt);
+				} catch (InvalidActivityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -71,11 +77,15 @@ public class EventRegistrationPage extends JFrame {
 		participantNameTextField.setText("");
 	}
 	
-	private void addParticipantButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	private void addParticipantButtonActionPerformed(java.awt.event.ActionEvent evt) throws InvalidActivityException {
 		EventRegistrationController erc = new EventRegistrationController();
 		erc.createParticipant(participantNameTextField.getText());
-	}
-	
-	refreshData();
+		refreshData();
+		}
+		
 
-}
+	
+
+	}
+
+
