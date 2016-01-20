@@ -27,13 +27,7 @@ public class TestEventRegistrationController {
 		PersistenceXStream.setAlias("manager", Registration.class);
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
+	
 
 	@After
 	public void tearDown() throws Exception {
@@ -50,7 +44,12 @@ public class TestEventRegistrationController {
 		String name = "Oscar";
 		
 		EventRegistrationController erc = new EventRegistrationController();
-		erc.createParticipant(name);
+		try {
+			erc.createParticipant(name);
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		checkResultsParticipant(name, rm);
 		
@@ -60,6 +59,72 @@ public class TestEventRegistrationController {
 		checkResultsParticipant(name, rm2);
 		
 
+	}
+	
+	
+	@Test
+	public void testCreateParticipantNull() {
+		RegistrationManager rm = RegistrationManager.getInstance();
+		assertEquals(0, rm.getParticipant().size());
+		
+		String name = null;
+		
+		String error = null;
+		EventRegistrationController erc = new EventRegistrationController();
+		try {
+			erc.createParticipant(name);
+		} catch (InvalidInputException e) {
+			error = e.getMessage();
+			
+		}
+		//check error
+		assertEquals("Participant name cannot be empty!", error);
+		
+		//check no change in memory
+		assertEquals(0, rm.getParticipant().size());
+		
+	}
+	
+	@Test
+	public void testCreateParticipantEmpty() {
+		RegistrationManager rm = RegistrationManager.getInstance();
+		assertEquals(0, rm.getParticipant().size());
+		
+		String name = "";
+		
+		String error = null;
+		EventRegistrationController erc = new EventRegistrationController();
+		try { 
+			erc.createParticipant(name);
+		}catch (InvalidInputException e) {
+			error = e.getMessage();
+		}
+		//check error
+		assertEquals("Participant name cannot be empty!", error);
+		
+		//check no change in memory
+		assertEquals(0, rm.getParticipant().size());
+	}
+	
+	@Test
+	public void testCreateParticipantSpace() {
+		RegistrationManager rm = RegistrationManager.getInstance();
+		assertEquals(0, rm.getParticipant().size());
+		
+		String name = "";
+		
+		String error = null;
+		EventRegistrationController erc = new EventRegistrationController();
+		try { 
+			erc.createParticipant(name);
+		}catch (InvalidInputException e) {
+			error = e.getMessage();
+		}
+		//check error
+		assertEquals("Participant name cannot be empty!", error);
+				
+		//check no change in memory
+		assertEquals(0, rm.getParticipant().size());
 	}
 
 	private void checkResultsParticipant(String name, RegistrationManager rm2) {

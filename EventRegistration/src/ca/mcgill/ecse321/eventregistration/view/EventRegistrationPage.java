@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import ca.mcgill.ecse321.eventregistration.controller.EventRegistrationController;
+import ca.mcgill.ecse321.eventregistration.controller.InvalidInputException;
 
 public class EventRegistrationPage extends JFrame {
 
@@ -79,7 +80,12 @@ public class EventRegistrationPage extends JFrame {
 	
 	private void addParticipantButtonActionPerformed(java.awt.event.ActionEvent evt) throws InvalidActivityException {
 		EventRegistrationController erc = new EventRegistrationController();
-		erc.createParticipant(participantNameTextField.getText());
+		try {
+			erc.createParticipant(participantNameTextField.getText());
+		} catch (InvalidInputException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		refreshData();
 		}
 		
