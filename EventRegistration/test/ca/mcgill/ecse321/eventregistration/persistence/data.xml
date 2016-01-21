@@ -3,20 +3,28 @@
     <manager id="3">
       <id>1</id>
       <participant id="4">
-        <name>Oscar</name>
+        <name>Martin</name>
       </participant>
       <event id="5">
-        <name>Soccer Game</name>
-        <eventDate id="6">2016-10-16</eventDate>
-        <startTime id="7">09:00:00</startTime>
-        <endTime id="8">10:30:00</endTime>
+        <name>Concert</name>
+        <eventDate id="6">2015-09-15</eventDate>
+        <startTime id="7">08:30:00</startTime>
+        <endTime id="8">10:00:00</endTime>
       </event>
     </manager>
+    <manager id="9">
+      <id>2</id>
+      <participant id="10">
+        <name>Jennifer</name>
+      </participant>
+      <event reference="5"/>
+    </manager>
   </registrations>
-  <participant id="9">
+  <participant id="11">
     <participant reference="4"/>
+    <participant reference="10"/>
   </participant>
-  <event id="10">
+  <event id="12">
     <event reference="5"/>
   </event>
 </ca.mcgill.ecse321.eventregistration.model.RegistrationManager>
